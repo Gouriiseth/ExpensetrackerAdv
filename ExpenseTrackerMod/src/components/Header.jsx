@@ -1,18 +1,30 @@
 import React from 'react'
 import { useState } from 'react'
-const Header = () => {
-    const [activeBtn, setActiveBtn] = useState("income")
-    const handleActive=(btnType)=>{
-            setActiveBtn(btnType)
+const Header = ({saved}) => {
+
+    const [income, setIncome] = useState([])
+    const [expense, setExpense] = useState([])
+
+    const handleIncome=()=>{
+        const incomee=saved.filter((save)=>save.category==='income')
+        setIncome(incomee)
+        console.log(incomee);
+    }
+    const handleExpense=()=>{
+        const expensee=saved.filter((save)=>save.category==='expense')
+
+        console.log(expensee);
+
     }
 
+
+    
   return (
     <div className="flex flex-row justify-center bg-gray-700">
-        <div>
-        <button className={`${activeBtn==='income' ? 'text-blue-500 border-solid border-2 border-blue-600' :'bg-gray-900' }mt-3 text-white rounded-lg py-2 px-9 mx-4 text-2xl `} onClick={()=>handleActive('income')}>Income</button>
+        <button className='bg-gray-900 mt-3 text-white rounded-lg py-2 px-9 mx-4 border-2 border-transparent  text-2xl hover:text-green-500 hover:border-solid hover:border-2 hover:border-green-600' onClick={handleIncome}>Income</button>
+        <button className='bg-gray-900 mt-3 text-white rounded-lg py-2 px-9 mx-4 border-2 border-transparent text-2xl hover:text-red-500 hover:border-solid hover:border-2 hover:border-red-600' onClick={handleExpense}>Expense</button>
 
-        <button className='bg-gray-900 mt-3 text-white rounded-lg py-2 px-9 mx-4   text-2xl hover:text-red-500 hover:border-solid hover:border-2 hover:border-red-600'>Expense</button>
-    </div>
+        
     </div>
   )
 }
