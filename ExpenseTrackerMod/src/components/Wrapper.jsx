@@ -1,7 +1,7 @@
 import React from 'react'
 import Content from './Content'
 import Category from './Category'
-import Header from './Header'
+// import Header from './Header'
 import Account from './Account'
 import { useState } from 'react'
 
@@ -10,10 +10,31 @@ const Wrapper = () => {
     const [isCat, setIsCat] = useState(false)
     const [catItem, setCatItem] = useState('')
     const [accItem, setAccItem] = useState('')
+    const [categoryData, setCategoryData] = useState([
+        'food',
+        'movie',
+        'travel',
+        'rent',
+        'shopping',
+        'hospital',
+        'fees',
+        'other',
+    ])
+
+    // const CategoryData = [
+    //     'food',
+    //     'movie',
+    //     'travel',
+    //     'rent',
+    //     'shopping',
+    //     'hospital',
+    //     'fees',
+    //     'other',
+    // ]
     return (
         <>
-                <Header
-                />
+                {/* <Header
+                /> */}
             <div className="flex justify-between">
                {/* <div> */}
                 <Content 
@@ -21,6 +42,8 @@ const Wrapper = () => {
                     setIsCat={setIsCat}
                     catItem={catItem}
                     accItem={accItem}
+                    setCatItem={setCatItem}
+                    setAccItem={setAccItem}
                 />
                 {/* </div> */}
 
@@ -29,6 +52,8 @@ const Wrapper = () => {
                 <Category 
                     setCatItem={setCatItem}
                     setIsCat={setIsCat}
+                    categoryData={categoryData}
+                    setCategoryData={setCategoryData}
                 />
                 )}
                 {isAcc && ( 

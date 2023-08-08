@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import Category from './Category'
 
-const Content = ({setIsAcc, setIsCat,catItem,accItem}) => {
+const Content = ({setIsAcc, setIsCat,catItem,accItem,setCatItem,setAccItem}) => {
 
   const [date, setDate] = useState('');
   const [amount, setAmount] = useState(null);
@@ -14,7 +14,6 @@ const Content = ({setIsAcc, setIsCat,catItem,accItem}) => {
   const [note, setNote] = useState('');
   const [desc, setDesc] = useState('');
   const [saved, setSaved] = useState([]);
-  // const [isCatActive, setIsCatActive] = useState(false);
 
 
   const handleSave = () => {
@@ -31,6 +30,8 @@ const Content = ({setIsAcc, setIsCat,catItem,accItem}) => {
     setAccount('');
     setNote('');
     setDesc('');
+    setCatItem('')
+    setAccItem('')
 
   }
 
@@ -65,7 +66,7 @@ const Content = ({setIsAcc, setIsCat,catItem,accItem}) => {
           <div className='flex mt-4 mb-2'>
             <label className="text-2xl text-white mx-6">Category</label>
             <input type="text" readOnly={true} value={catItem} onClick={() => {setIsCat(p => p = !p) ;
-                setIsAcc(false);
+              setIsAcc(false);
 }} className="mx-1 w-1/2 border-b border-white bg-transparent text-2xl px-3 outline-none" />
           </div>
 
