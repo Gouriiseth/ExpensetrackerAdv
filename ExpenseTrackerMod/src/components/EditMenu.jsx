@@ -28,7 +28,7 @@ const EditMenu = ({setIsEdit,setEditItem,categoryData,setCategoryData}) => {
           <div className='flex flex-col'>
         {categoryData.map((editData)=>
             <div className="flex justify-evenly ">
-            <div className="text-white px-5 py-2 cursor-pointer mb-1 w-1/2 " onClick={(e) => { setEditItem(editData); setIsEdit(false) }}>{editData}</div>
+            <div className="text-white px-5 py-2 cursor-pointer mb-1 w-1/2 " onClick={() => { setEditItem(editData); setIsEdit(false) }}>{editData}</div>
             <button className="delete w-1/2 text-white " onClick={()=>del(editData)}>delete</button>
             </div>
         )}

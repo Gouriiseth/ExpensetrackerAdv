@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 // import Header from './Header'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import Category from './Category'
+import SaveBtn from './saveBtn'
 
-const Content = ({setIsAcc, setIsCat,catItem,accItem,setCatItem,setAccItem}) => {
+const Content = ({setIsAcc, setIsCat,catItem,accItem,setCatItem,setAccItem,isIncome,isExpense}) => {
 
   const [date, setDate] = useState('');
   const [amount, setAmount] = useState(null);
@@ -15,15 +16,15 @@ const Content = ({setIsAcc, setIsCat,catItem,accItem,setCatItem,setAccItem}) => 
   const [desc, setDesc] = useState('');
   const [saved, setSaved] = useState([]);
 
-
   const handleSave = () => {
     const newSave = { date, amount, category, account, note, desc };
-
+    if(isIncome==false && isExpense==true){
+      
     if (date !== '' && amount !== 0 && category !== ' ' && account !== '') {
       setSaved([...saved, newSave])
-      console.log(saved);
     }
-
+  }
+  
     setDate('');
     setAmount('');
     setCategory('');
@@ -32,12 +33,9 @@ const Content = ({setIsAcc, setIsCat,catItem,accItem,setCatItem,setAccItem}) => 
     setDesc('');
     setCatItem('')
     setAccItem('')
-
+    
   }
-
-
-
-
+    
   return (
     <>
       {/* <div className="flex flex-col"> */}
@@ -94,11 +92,9 @@ const Content = ({setIsAcc, setIsCat,catItem,accItem,setCatItem,setAccItem}) => 
             </div>
           </div>
 
-          <div className="btnn flex justify-center  ">
-            <button className="save mt-7 mx-4 rounded-lg bg-red-700 text-2xl text-white px-9 py-2 mx-4
-            " onClick={handleSave}>Save</button>
-            <button className="continue mt-7 mx-4 rounded-lg border-b border-2 border-white text-2xl text-white px-5 py-2">Continue</button>
-          </div>
+          <SaveBtn 
+            saved={saved}
+          />
         </div>
       </div>
       {/* </div> */}
