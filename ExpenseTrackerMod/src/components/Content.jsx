@@ -4,9 +4,9 @@ import { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import Category from './Category'
-import SaveBtn from './saveBtn'
+// import SaveBtn from './saveBtn'
 
-const Content = ({setIsAcc, setIsCat,catItem,accItem,setCatItem,setAccItem,isIncome,isExpense}) => {
+const Content = ({ setIsAcc, setIsCat, catItem, accItem, setCatItem, setAccItem, isIncome }) => {
 
   const [date, setDate] = useState('');
   const [amount, setAmount] = useState(null);
@@ -14,17 +14,27 @@ const Content = ({setIsAcc, setIsCat,catItem,accItem,setCatItem,setAccItem,isInc
   const [account, setAccount] = useState('');
   const [note, setNote] = useState('');
   const [desc, setDesc] = useState('');
-  const [saved, setSaved] = useState([]);
+  // const [saved, setSaved] = useState([]);
+  const [incomeSave, setIncomeSave] = useState('')
+  const [expenseSave, setExpenseSave] = useState('')
 
   const handleSave = () => {
     const newSave = { date, amount, category, account, note, desc };
-    if(isIncome==false && isExpense==true){
+    // if(isIncome==false && isExpense==true){
+    // if (date !== '' && amount !== 0 && category !== ' ' && account !== '') {
+      if (isIncome) {
+        setIncomeSave([...incomeSave, newSave]);
+      }
+
+      else {
+        setExpenseSave([...expenseSave, newSave]);
+        
+      }
+      // }
+      // console.log(expenseSave,'    ',incomeSave);
+      // }
+      console.log(isIncome);
       
-    if (date !== '' && amount !== 0 && category !== ' ' && account !== '') {
-      setSaved([...saved, newSave])
-    }
-  }
-  
     setDate('');
     setAmount('');
     setCategory('');
@@ -33,9 +43,9 @@ const Content = ({setIsAcc, setIsCat,catItem,accItem,setCatItem,setAccItem,isInc
     setDesc('');
     setCatItem('')
     setAccItem('')
-    
+
   }
-    
+
   return (
     <>
       {/* <div className="flex flex-col"> */}
@@ -63,9 +73,10 @@ const Content = ({setIsAcc, setIsCat,catItem,accItem,setCatItem,setAccItem,isInc
           {/* <div className="cat flex  "> */}
           <div className='flex mt-4 mb-2'>
             <label className="text-2xl text-white mx-6">Category</label>
-            <input type="text" readOnly={true} value={catItem} onClick={() => {setIsCat(p => p = !p) ;
+            <input type="text" readOnly={true} value={catItem} onClick={() => {
+              setIsCat(p => p = !p);
               setIsAcc(false);
-}} className="mx-1 w-1/2 border-b border-white bg-transparent text-2xl px-3 outline-none" />
+            }} className="mx-1 w-1/2 border-b border-white bg-transparent text-2xl px-3 outline-none" />
           </div>
 
           {/* {isCatActive && (
@@ -74,8 +85,10 @@ const Content = ({setIsAcc, setIsCat,catItem,accItem,setCatItem,setAccItem,isInc
           {/* </div> */}
           <div className='flex mt-4 mb-2'>
             <label className="text-2xl text-white mx-6">Account</label>
-            <input type="text" readOnly={true} value={accItem} onClick={()=>{setIsAcc(q=>q=!q);
-            setIsCat(false)}} className="mx-4 w-1/2 border-b border-white bg-transparent text-2xl px-3 outline-none" />
+            <input type="text" readOnly={true} value={accItem} onClick={() => {
+              setIsAcc(q => q = !q);
+              setIsCat(false)
+            }} className="mx-4 w-1/2 border-b border-white bg-transparent text-2xl px-3 outline-none" />
           </div>
 
           <div className='flex mt-4 mb-2 '>
@@ -91,13 +104,16 @@ const Content = ({setIsAcc, setIsCat,catItem,accItem,setCatItem,setAccItem,isInc
               <i className="fa-solid fa-camera text-4xl"></i>
             </div>
           </div>
+          <div>
+      <button className="save mt-7 mx-4 rounded-lg bg-red-700 text-2xl text-white px-9 py-2 mx-4" onClick={handleSave} >Save</button>
+       </div>
 
-          <SaveBtn 
-            saved={saved}
-          />
+          {/* <SaveBtn
+            // saved={saved}
+            handleSave={handleSave}
+          /> */}
         </div>
       </div>
-      {/* </div> */}
     </>
   )
 }

@@ -5,7 +5,7 @@ import Category from './Category'
 import Account from './Account'
 import { useState } from 'react'
 
-const Wrapper = ({isIncome,isExpense}) => {
+const Wrapper = ({isIncome}) => {
     const [isAcc, setIsAcc] = useState(false)
     const [isCat, setIsCat] = useState(false)
     const [catItem, setCatItem] = useState('')
@@ -45,7 +45,6 @@ const Wrapper = ({isIncome,isExpense}) => {
                     setCatItem={setCatItem}
                     setAccItem={setAccItem}
                     isIncome={isIncome}
-                    isExpense={isExpense}
                 />
                 {/* </div> */}
 
