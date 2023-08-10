@@ -5,7 +5,7 @@ const Tabsec = (clickTab) => {
     <>
 
     {clickTab && (
-        <div className='text-white'>
+        <div className='text-black'>
             Tab 2 Opened
         </div>
     ) 

@@ -1,19 +1,23 @@
 import Header from './components/Header'
-import Content from './components/Content'
 import Dashboard from './components/Dashboard'
-// import Wrapper from './components/Wrapper'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 
 function App() {
   return (
-    <>
-    <div className="bg-gray-800 h-screen">
-      <Dashboard />
+    <>  
+    {/* <div className="bg-slate-100"> 
+      <Dashboard /> */}
     {/* <Header /> */}
-    {/* <Content /> */}
 
-    {/* <Wrapper /> */}
+<Router>
+          <Routes>
+            <Route path="/header" element={<Header />} />
+            <Route path="/" element={<Dashboard />} />
+          </Routes>
+        </Router>
+    {/* </div> */}
 
-    </div>
     </>
   )
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 import Content from './Content'
 import Category from './Category'
-// import Header from './Header'
 import Account from './Account'
 import { useState } from 'react'
 
@@ -20,23 +19,16 @@ const Wrapper = ({isIncome}) => {
         'fees',
         'other',
     ])
+     const [categoryDatain, setCategoryDatain] = useState([
+        'allowance',
+        'salary',
+        'petty cash',
+        'bonus',
+        'other',
+     ])
 
-    // const CategoryData = [
-    //     'food',
-    //     'movie',
-    //     'travel',
-    //     'rent',
-    //     'shopping',
-    //     'hospital',
-    //     'fees',
-    //     'other',
-    // ]
     return (
-        <>
-                {/* <Header
-                /> */}
             <div className="flex justify-between">
-               {/* <div> */}
                 <Content 
                     setIsAcc={setIsAcc}
                     setIsCat={setIsCat}
@@ -46,8 +38,6 @@ const Wrapper = ({isIncome}) => {
                     setAccItem={setAccItem}
                     isIncome={isIncome}
                 />
-                {/* </div> */}
-
                 
                 {isCat && (
                 <Category 
@@ -55,6 +45,10 @@ const Wrapper = ({isIncome}) => {
                     setIsCat={setIsCat}
                     categoryData={categoryData}
                     setCategoryData={setCategoryData}
+                    isIncome={isIncome}
+
+                    categoryDatain={categoryDatain}
+                    setCategoryDatain={setCategoryDatain}
                 />
                 )}
                 {isAcc && ( 
@@ -64,7 +58,6 @@ const Wrapper = ({isIncome}) => {
                 />
             )}
             </div>
-        </>
     )
 }
 

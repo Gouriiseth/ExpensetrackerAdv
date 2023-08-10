@@ -1,39 +1,38 @@
 import React from 'react'
 import { useState } from 'react'
 import Wrapper from './Wrapper'
+
 const Header = ({saved}) => {
 
-    // const [income, setIncome] = useState([])
-    // const [expense, setExpense] = useState([])
+    const [isIncome, setIsIncome] = useState(null)
+    // const handleIncome=()=>{
+    //     const incomee=saved.filter((save)=>save.category==='income')
+    //     setIncome(incomee)
+    //     console.log(incomee);
+    // }
+    // const handleExpense=()=>{
+    //     const expensee=saved.filter((save)=>save.category==='expense')
 
-    const [isIncome, setIsIncome] = useState(false)
-    // const [isExpense, setIsExpense] = useState(false)
+    //     console.log(expensee);
 
-    const handleIncome=()=>{
-        const incomee=saved.filter((save)=>save.category==='income')
-        setIncome(incomee)
-        console.log(incomee);
-    }
-    const handleExpense=()=>{
-        const expensee=saved.filter((save)=>save.category==='expense')
+    // }
 
-        console.log(expensee);
 
-    }
+  const buttonClass = `bg-${isIncome ? 'green-600' : 'blue-300 hover:border-solid hover:border-2 hover:border-green-500'} m-3 text-black rounded-lg py-2 px-9 mx-4 border-2 border-transparent text-2xl `
 
-    return (
+  const buttonClasse = `bg-${(isIncome===false) ? 'red-600' : 'blue-300 hover:border-solid hover:border-3 hover:border-red-500'} m-3 text-black rounded-lg py-2 px-9 mx-4 border-2 border-transparent text-2xl`
+
+     return (
         <>
-        <div className="body w-full">
-      <div className="flex flex-row justify-center bg-gray-700 ">
-        <button className='bg-gray-900 mt-3 text-white rounded-lg py-2 px-9 mx-4 border-2 border-transparent  text-2xl hover:text-green-500 hover:border-solid hover:border-2 hover:border-green-600' onClick={()=>{setIsIncome(true);console.log(isIncome)}}>Income</button>
-
-      <button className='bg-gray-900 mt-3 text-white rounded-lg py-2 px-9 mx-4 border-2 border-transparent text-2xl hover:text-red-500 hover:border-solid hover:border-2 hover:border-red-600' onClick={() => {setIsIncome(false);console.log(isIncome);} }>Expense</button>
+        <div className="bg-slate-100 h-screen top-0">
+      <div className="bg-slate-100 flex flex-row justify-center ">
+        <button className={buttonClass} onClick={() => setIsIncome(true)}>Income</button>
+        <button className={buttonClasse} onClick={()=>setIsIncome(false)}>Expense</button>
     </div>
     <Wrapper
       isIncome={isIncome}
-      // isExpense={isExpense}
     />
-        </div>
+         </div>
   </>
   )
 }

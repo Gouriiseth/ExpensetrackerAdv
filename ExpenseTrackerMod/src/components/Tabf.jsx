@@ -7,7 +7,7 @@ const Tabf = ({onClick,handleClose,handleOpen}) => {
   return (
     <>
             <Drawer anchor="left" open={onClick} onOpen={handleOpen} onClose={handleClose}>
-            <div className='bg-gray-600 text-white text-2xl w-42 px-10 py-2 h-full'>
+            <div className='bg-gray-100 text-black text-2xl w-42 px-10 py-2 h-full'>
                 <h2>Drawer Content</h2>
                 <List>
                     {['test1', 'test2', 'test3', 'test4', 'test5'].map((text) => (

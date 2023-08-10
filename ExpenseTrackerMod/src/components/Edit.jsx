@@ -2,7 +2,7 @@ import React from 'react'
 
 const Edit = ({setIsEdit,}) => {
   return (
-      <button className="edit" onClick={() => {setIsEdit(p => p = !p);}}>Edit</button>
+      <button className="edit mb-4 text-red-500 text-bold text-2xl" onClick={() => {setIsEdit(p => p = !p);}}>Edit</button>
   )
 }
 

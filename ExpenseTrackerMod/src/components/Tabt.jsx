@@ -5,7 +5,7 @@ const Tabt = (clickTabt) => {
         <>
 
             {clickTabt && (
-                <div className='text-white'>
+                <div className='text-black'>
                     Tab 3 Opened
                 </div>
             )
