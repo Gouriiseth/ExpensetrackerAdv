@@ -6,12 +6,9 @@ import EditMenu from './EditMenu'
 const Category = ({setCatItem,setIsCat,categoryData,setCategoryData,isIncome,categoryDatain,setCategoryDatain}) => {
     const [isEdit, setIsEdit] = useState(false)
     const [editItem, setEditItem] = useState('')
-
-  // console.log(categoryData);
-  // categoryData.map((item)=>console.log(item))
   return (
     <>
-      <div className='w-[45%] bg-slate-200 h-full pb-8 pt-2 px-4 rounded-lg border-2 border-blue-200'>
+      <div className='w-[45%] bg-slate-200 max-h-1/2 pb-8 pt-2 px-4 rounded-lg border-2 border-blue-200'>
       <div className="edit text-end ">
 
       <Edit
