@@ -8,7 +8,7 @@ const Category = ({setCatItem,setIsCat,categoryData,setCategoryData,isIncome,cat
     const [editItem, setEditItem] = useState('')
 
   // console.log(categoryData);
-  categoryData.map((item)=>console.log(item))
+  // categoryData.map((item)=>console.log(item))
   return (
     <>
       <div className='w-[45%] bg-slate-200 h-full pb-8 pt-2 px-4 rounded-lg border-2 border-blue-200'>

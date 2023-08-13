@@ -1,34 +1,41 @@
 import React, { useEffect } from 'react'
-import { useState } from 'react'
+import { useState,useContext } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import Category from './Category'
 import { useNavigate } from 'react-router-dom';
+import SavedContent from './SavedContent'
+import { SavedContext } from './SavedContext'
 
 
 const Content = ({ setIsAcc, setIsCat, catItem, accItem, setCatItem, setAccItem, isIncome }) => {
-
+  const {dataArr,setDataArr}= useContext(SavedContext);
   const [date, setDate] = useState('');
-  const [amount, setAmount] = useState(null);
+  const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState('');
   const [account, setAccount] = useState('');
   const [note, setNote] = useState('');
   const [desc, setDesc] = useState('');
-  const [incomeSave, setIncomeSave] = useState('')
-  const [expenseSave, setExpenseSave] = useState('')
+  const [incomeSave, setIncomeSave] = useState([])
+  const [expenseSave, setExpenseSave] = useState([])
+  // const [saved, setSaved] = useState(false)
 
   const handleSave = () => {
-    const newSave = { date, amount, category, account, note, desc };
-      if (isIncome) {
-        setIncomeSave([...incomeSave, newSave]);
-      }
+    const newSave = { date, amount, catItem, accItem, note, desc };
+    if (isIncome) {
+      setIncomeSave([...incomeSave, newSave]);
+        setDataArr(incomeSave)
+      console.log(incomeSave);
+    }
 
-      else {
-        setExpenseSave([...expenseSave, newSave]);
-        
-      }
-      console.log(isIncome);
-      
+    else {
+      setExpenseSave([...expenseSave, newSave]);
+      setDataArr(expenseSave)
+      console.log(dataArr,' ',typeof(dataArr));
+    }
+    // setDataArr(true);
+    // console.log(isIncome);
+
     setDate('');
     setAmount('');
     setCategory('');
@@ -43,44 +50,46 @@ const Content = ({ setIsAcc, setIsCat, catItem, accItem, setCatItem, setAccItem,
   const navigate = useNavigate();
   const handleBackClick = (event) => {
     navigate(-1);
-
   }
+
+  const toggleColor = ` ${isIncome ? 'border-b-2 border-green-500' : "border-b-2 border-red-500"} mx-3 w-1/2 bg-transparent text-2xl px-3 outline-none`
+
   return (
     <>
       <div className='flex flex-col w-full '>
-        <div className='  mb-5  pb-7'>
+        <div className='  mb-5 pb-7'>
 
-          <div className="flex  mt-4 mb-2 ">
-            <label className="text-2xl text-black mx-6">Date</label>
-            <input type="date" readOnly={true} value={date} className="mx-12 w-1/2 border-b border-blue-300 bg-transparent text-2xl px-3 outline-none" />
-            {/* <DatePicker selected={date} onChange={(date) => setDate(date)} dateFormat='dd/MM/yyyy' placeholderText='dd/MM/yyyy'>
+          <div className="ml-6 flex mt-4 mb-2">
+            <label className="text-2xl text-black mr-16">Date</label>
+            {/* <input type="date" readOnly={true} value={date} className="mx-12 w-1/2 border-b border-blue-300 bg-transparent text-2xl px-3 outline-none" /> */}
+            <DatePicker selected={date} onChange={(date) => setDate(date)} dateFormat='dd/MM/yyyy' placeholderText='dd/MM/yyyy'>
 
-            </DatePicker> */}
+            </DatePicker>
           </div>
 
-          <div className="flex  mt-4 mb-2 ">
-            <label className="text-2xl text-black  mx-6">Amount</label>
-            <input type="number" placeholder='0' value={amount} onChange={(e) => setAmount(e.target.value)} className="mx-3 w-1/2 border-b border-blue-300 bg-transparent text-2xl px-3 outline-none" />
+          <div className="ml-6 flex mt-4 mb-2 ">
+            <label className="text-2xl  text-black mr-6 ">Amount</label>
+            <input type="number" placeholder='0' value={amount} onChange={(e) => setAmount(e.target.value)} className={toggleColor} />
           </div>
 
-          <div className='flex mt-4 mb-2'>
-            <label className="text-2xl text-black mx-6">Category</label>
+          <div className='ml-6 flex mt-4 mb-2'>
+            <label className="text-2xl text-black mr-4">Category</label>
             <input type="text" readOnly={true} value={catItem} onClick={() => {
               setIsCat(p => p = !p);
               setIsAcc(false);
-            }} className="mx-1 w-1/2 border-b border-blue-300 bg-transparent text-2xl px-3 outline-none" />
+            }} className={toggleColor} />
           </div>
-          <div className='flex mt-4 mb-2'>
-            <label className="text-2xl text-black mx-6">Account</label>
+          <div className='ml-6 flex mt-4 mb-2'>
+            <label className="text-2xl text-black mr-6">Account</label>
             <input type="text" readOnly={true} value={accItem} onClick={() => {
               setIsAcc(q => q = !q);
               setIsCat(false)
-            }} className="mx-4 w-1/2 border-b border-blue-300 bg-transparent text-2xl px-3 outline-none" />
+            }} className={toggleColor} />
           </div>
 
-          <div className='flex mt-4 mb-2 '>
-            <label className="text-2xl text-black mx-6">Note</label>
-            <input type="text" value={note} onChange={(e) => setNote(e.target.value)} maxLength="50" className="mx-12 w-1/2 border-b border-blue-300 bg-transparent text-2xl px-3 outline-none " />
+          <div className='ml-6 flex mt-4 mb-2 '>
+            <label className="text-2xl text-black mr-14">Note</label>
+            <input type="text" value={note} onChange={(e) => setNote(e.target.value)} maxLength="50" className={toggleColor} />
           </div>
 
         </div>
@@ -92,12 +101,18 @@ const Content = ({ setIsAcc, setIsCat, catItem, accItem, setCatItem, setAccItem,
             </div>
           </div>
           <div>
-      <button className="save mt-7 mx-4 rounded-lg bg-red-700 text-2xl text-white px-9 py-2 mx-4" onClick={handleSave} >Save</button>
-      <button className="back mt-7 mx-4 rounded-lg bg-red-700 text-2xl text-white px-9 py-2 mx-4" onClick={handleBackClick}>Back</button>
+            <button className="save mt-7 mx-4 rounded-lg bg-red-700 text-2xl text-white px-9 py-2 mx-4" onClick={() => handleSave()} >Save</button>
+            <button className="back mt-7 mx-4 rounded-lg bg-red-700 text-2xl text-white px-9 py-2 mx-4" onClick={handleBackClick}>Back</button>
 
-       </div>
+          </div>
         </div>
       </div>
+      {true ?
+        (isIncome ? (
+          <SavedContent dataArr={incomeSave} />
+        ) : (
+          <SavedContent dataArr={expenseSave} />
+        )): (<div></div>)}
     </>
   )
 }
